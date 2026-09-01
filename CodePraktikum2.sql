@@ -227,10 +227,10 @@ SELECT REPLACE(last_name, 'a', '*')
 FROM employees;
 
 --Menggunakan alias dengan function
-SELECT LOWER(last_name) || LOWER(SUBTR(first_name,1,1)) AS "User Name"
+SELECT LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) AS "User Name"
 FROM employees;
 
-SELECT LOWER(last_name) || LOWER(SUBTR(first_name,1,1)) 
+SELECT LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) 
 FROM f_staffs;
 
 --Variabel Substitusi
