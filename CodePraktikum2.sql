@@ -61,6 +61,11 @@ FROM employees
 WHERE (department_id IN (50,80) AND first_name LIKE 'C%')
     OR last_name LIKE '%s%';
 
+
+--unsorted
+SELECT last_name, hire_date
+FROM employees
+
 --Sorting Rows
 SELECT last_name, hire_date
 FROM employees
@@ -70,10 +75,6 @@ ORDER BY hire_date;
 SELECT last_name, hire_date
 FROM employees
 ORDER BY hire_date DESC;
-
---unsorted
-SELECT last_name, hire_date
-FROM employees
 
 --Bisa juga mengurutkan dengan alias
 SELECT last_name, hire_date
@@ -86,11 +87,17 @@ AS "Date Started"
 FROM employees
 ORDER BY "Date Started";
 
---Bisa juga diurutkan dengan kolom lain yang tidak ditemapilkan
+--Bisa juga diurutkan dengan kolom lain yang tidak ditampilkan
 SELECT employee_id, first_name, hire_date
 FROM employees
 WHERE employee_id < 105
-ORDER BY hire_date;
+ORDER BY last_name;
+
+--dengan last_name
+SELECT employee_id, first_name, hire_date, last_name
+FROM employees
+WHERE employee_id < 105
+ORDER BY last_name;
 
 --Urutan yang dikerjakan SQL
 -- FROM, WHERE, SELECT, ORDER
@@ -168,10 +175,7 @@ FROM employees;
 SELECT CONCAT('Hello','World')
 FROM DUAL;
 
-SELECT first_name, last_name
-FROM employees;
-
-SELECT CONCAT(first_name, last_name)
+SELECT first_name, last_name, CONCAT(first_name, last_name)
 FROM employees;
 
 --SUBSTR
@@ -183,12 +187,6 @@ FROM DUAL;
 SELECT SUBSTR('HelloWorld',6)
 FROM DUAL;
 
-SELECT last_name
-FROM employees;
-
-SELECT SUBSTR(last_name,1,3)
-FROM employees;
-
 SELECT last_name, SUBSTR(last_name,1,3)
 FROM employees;
 
@@ -197,9 +195,6 @@ FROM employees;
 
 SELECT LENGTH('HelloWorld')
 FROM DUAL;
-
-SELECT LENGTH(last_name)
-FROM employees;
 
 SELECT last_name, LENGTH(last_name)
 FROM employees;
@@ -252,23 +247,14 @@ FROM DUAL;
 SELECT REPLACE('JACK and JUE', 'J') -- Karena tidak ada karakter pengganti, maka huruf 'J' akan dihilangkan
 FROM DUAL;
 
-SELECT REPLACE(last_name, 'a', '*')
-FROM employees;
-
 SELECT last_name, REPLACE(last_name, 'a', '*')
 FROM employees;
 
 --Menggunakan alias dengan function
-SELECT LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) AS "User Name"
+SELECT last_Name, first_name, LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) AS "User Name"
 FROM employees;
 
-SELECT last_Name, first_name
-FROM employees;
-
-SELECT LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) 
-FROM f_staffs;
-
-SELECT last_Name, first_name
+SELECT last_Name, first_name, LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) 
 FROM f_staffs;
 
 --Variabel Substitusi
