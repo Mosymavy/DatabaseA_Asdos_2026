@@ -29,7 +29,7 @@ WHERE location_id NOT IN (1700,1800);
 
 SELECT first_name, last_name
 FROM departments
-WHERE department_id NOT BETWEEN (30, 70);
+WHERE department_id NOT BETWEEN 30 AND 70;
 
 --Ada aturan dimana SQL akan menjalankan perintah berdasarkan urutan
 -- 1. Aritmatika + - * /
