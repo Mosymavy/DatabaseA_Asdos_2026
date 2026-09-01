@@ -27,6 +27,10 @@ SELECT department_name, location_id
 FROM departments
 WHERE location_id NOT IN (1700,1800);
 
+SELECT first_name, last_name
+FROM departments
+WHERE department_id NOT BETWEEN (30, 70);
+
 --Ada aturan dimana SQL akan menjalankan perintah berdasarkan urutan
 -- 1. Aritmatika + - * /
 -- 2. Concatenation (hello || world)
@@ -66,6 +70,10 @@ ORDER BY hire_date;
 SELECT last_name, hire_date
 FROM employees
 ORDER BY hire_date DESC;
+
+--unsorted
+SELECT last_name, hire_date
+FROM employees
 
 --Bisa juga mengurutkan dengan alias
 SELECT last_name, hire_date
@@ -127,6 +135,9 @@ SELECT last_name
 FROM employees
 WHERE LOWER(last_name) = 'abel';
 
+SELECT LOWER(last_name)
+FROM employees;
+
 --UPPER
 --Konversi semua huruf ke huruf besar
 
@@ -134,12 +145,18 @@ SELECT last_name
 FROM employees
 WHERE UPPER(last_name) = 'ABEL';
 
+SELECT UPPER(last_name)
+FROM employees;
+
 --INITCAP
 --Konversi semua huruf ke huruf besar pada huruf pertama pada setiap kata dan huruf kecil untuk huruf lainnya
 
 SELECT last_name
 FROM employees
 WHERE INITCAP(last_name) = 'Abel';
+
+SELECT INITCAP(last_name)
+FROM employees;
 
 
 --Character Manipulation Functions
@@ -151,7 +168,10 @@ WHERE INITCAP(last_name) = 'Abel';
 SELECT CONCAT('Hello','World')
 FROM DUAL;
 
-SELECT CONCAT(frist_name, last_name)
+SELECT first_name, last_name
+FROM employees;
+
+SELECT CONCAT(first_name, last_name)
 FROM employees;
 
 --SUBSTR
@@ -163,7 +183,13 @@ FROM DUAL;
 SELECT SUBSTR('HelloWorld',6)
 FROM DUAL;
 
+SELECT last_name
+FROM employees;
+
 SELECT SUBSTR(last_name,1,3)
+FROM employees;
+
+SELECT last_name, SUBSTR(last_name,1,3)
 FROM employees;
 
 --LENGTH
@@ -173,6 +199,9 @@ SELECT LENGTH('HelloWorld')
 FROM DUAL;
 
 SELECT LENGTH(last_name)
+FROM employees;
+
+SELECT last_name, LENGTH(last_name)
 FROM employees;
 
 --INSTR
@@ -199,7 +228,7 @@ FROM employees;
 SELECT RPAD('HelloWorld', 15, '-') -- (Struktur: String, jumlah karakter string, simbol yang dipilih)
 FROM DUAL;
 
-SELECT RPAD(last_name, 10, '*')
+SELECT last_name, RPAD(last_name, 10, '*')
 FROM employees;
 
 --TRIM
@@ -226,11 +255,20 @@ FROM DUAL;
 SELECT REPLACE(last_name, 'a', '*')
 FROM employees;
 
+SELECT last_name, REPLACE(last_name, 'a', '*')
+FROM employees;
+
 --Menggunakan alias dengan function
 SELECT LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) AS "User Name"
 FROM employees;
 
+SELECT last_Name, first_name
+FROM employees;
+
 SELECT LOWER(last_name) || LOWER(SUBSTR(first_name,1,1)) 
+FROM f_staffs;
+
+SELECT last_Name, first_name
 FROM f_staffs;
 
 --Variabel Substitusi
@@ -282,7 +320,7 @@ FROM DUAL;
 SELECT MOD(13,5) -- 13 dibagi 5 akan menghasilkan sisa 3
 FROM DUAL;
 
-SELECT country_name, MOD(airports,2) AS "Mod Demo"
+SELECT country_name, airports, MOD(airports,2) AS "Mod Demo"
 FROM wf_countries;
 
 --SYSDATE
@@ -293,42 +331,42 @@ FROM DUAL;
 
 --Menambahkan hari
 
-SELECT last_name, hire_date + 60
+SELECT last_name, hire_date, hire_date + 60
 FROM employees;
 
 --Menampilkan jumlah minggu sejak employee direkrut
 
-SELECT last_name, (SYSDATE-hire_date)/7
+SELECT last_name, hire_date, (SYSDATE-hire_date)/7
 FROM employees;
 
 --Mencari jumlah hari employee bekerja, lalu menjadikannya tahun
 
-SELECT employee_id, (end_date - start_date)/365 AS "Tenure in last job"
+SELECT employee_id, end_date, start_date, (end_date - start_date)/365 AS "Tenure in last job"
 FROM job_history;
 
 --MONTHS_BETWEEN
 --Jumlah bulan antara dua hari
 
-SELECT last_name, hire_date
+SELECT last_name, hire_date, MONTHS_BETWEEN(SYSDATE, hire_date)
 FROM employees
 WHERE MONTHS_BETWEEN(SYSDATE, hire_date) > 240;
 
 --ADD_MONTHS
 --Menambahkan bulan ke hari
 
-SELECT ADD_MONTHS(SYSDATE, 12) AS "Next Year"
+SELECT SYSDATE, ADD_MONTHS(SYSDATE, 12) AS "Next Year"
 FROM DUAL;
 
 --NEXT_DAY
 --Mencari tanggal selanjutnya pada hari yang dipilih
 
-SELECT NEXT_DAY(SYSDATE, 'Saturday') AS "Next Saturday" --Mengambil input tanggal dan hari yang ingin dicari
+SELECT SYSDATE, NEXT_DAY(SYSDATE, 'Saturday') AS "Next Saturday" --Mengambil input tanggal dan hari yang ingin dicari
 FROM DUAL;
 
 --LAST_DAY
 --Menampilkan hari terakhir pada bulan
 
-SELECT LAST_DAY(SYSDATE) AS "End of the Month"
+SELECT SYSDATE, LAST_DAY(SYSDATE) AS "End of the Month"
 FROM DUAL;
 
 --ROUND
