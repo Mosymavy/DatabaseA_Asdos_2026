@@ -288,6 +288,9 @@ FROM DUAL;
 SELECT ROUND(67.6867, 2) -- Angka 2 menunjukkan sampai angka desimal keberapa akan dibulatkan (disini angka kedua, sehingga hasil menjadi 67.69)
 FROM DUAL;
 
+SELECT ROUND(67.6867, -1) -- Bisa juga digunakan untuk membulatkan angka bukan desimal
+FROM DUAL;
+
 --TRUNC
 --Membulatkan angka desimal ke bawah
 
@@ -298,6 +301,9 @@ SELECT TRUNC(67.69)
 FROM DUAL;
 
 SELECT TRUNC(67.6867, 2) -- Sama seperti round untuk menunjukkan angka desimal yang dibulatkan
+FROM DUAL;
+
+SELECT TRUNC(67.6867, -1)
 FROM DUAL;
 
 --MOD
