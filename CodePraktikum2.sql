@@ -64,7 +64,7 @@ WHERE (department_id IN (50,80) AND first_name LIKE 'C%')
 
 --unsorted
 SELECT last_name, hire_date
-FROM employees
+FROM employees;
 
 --Sorting Rows
 SELECT last_name, hire_date
