@@ -366,7 +366,7 @@ CONNECT BY PRIOR employee_id = manager_id;
 -- Bottom Up Hierarchical Queries: 
 SELECT LPAD(last_name, LENGTH(last_name) + (LEVEL*2)-2, '_') AS ORG_CHART
 FROM employees
-START WITH last_name = 'Grant' CONNECT BY employee_id = PRIOR manager_id
+START WITH last_name = 'Grant' CONNECT BY employee_id = PRIOR manager_id;
 
 SELECT last_name
 FROM employees
@@ -376,4 +376,4 @@ START WITH last_name = 'Kochhar' CONNECT BY PRIOR employee_id = manager_id;
 SELECT last_name
 FROM employees
 START WITH last_name = 'Kochhar' CONNECT BY PRIOR employee_id = manager_id
-AND last_name 
+AND last_name;
