@@ -346,7 +346,7 @@ FROM employees worker JOIN employees manager
 SELECT employee_id, last_name, job_id, manager_id
 FROM employees
 START WITH employee_id = 100 -- Baris yang digunakan sebagai root untuk pohon yang dibentuk
-CONNECT BY PRIOR employee_id = manager_id -- Menjelaskan bagaimana bentuk join pada baris
+CONNECT BY PRIOR employee_id = manager_id; -- Menjelaskan bagaimana bentuk join pada baris
 
 SELECT last_name ||' reports to ' || PRIOR last_name AS "Walk Top Down"
 FROM employees
