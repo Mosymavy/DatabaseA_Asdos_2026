@@ -20,7 +20,7 @@ WHERE job_id LIKE '%_R%';
 SELECT salary, TO_CHAR(salary, '$9,999') AS "Salary"
 FROM employees;
 
-SELECT salary, TO_CHAR(salary, '$99,999.99') AS "Salary"
+SELECT salary, TO_CHAR(salary, '$99,999.99') AS "salary", TO_CHAR(salary, '$9,999') AS "Salary"
 FROM employees;
 
 SELECT salary, TO_CHAR(salary, 'L99,999.99') AS "Salary"
@@ -137,18 +137,18 @@ SELECT TO_DATE('November 3, 2001', 'Month DD, yyyy') FROM dual;
 SELECT TO_DATE('3 NOV, 2001', 'DD MON, YYYY') FROM dual;
 
 --fx = harus spesifik/benar-benar sama (misal: jika ada 0 di depan (kalau misal 1 dijadikan 01), maka harus menggunakan fx)
-SELECT TO_DATE('july312004', 'monthDDYYYY') as "Date" from dual;
-SELECT TO_DATE('july 312004', 'fxmonth DDYYYY') as "Date" from dual;
+SELECT TO_DATE('july 1 2004', 'month DD YYYY') as "Date" from dual;
+SELECT TO_DATE('july 03 2004', 'fxmonth DD YYYY') as "Date" from dual;
 SELECT TO_DATE('11 sep, 1965', 'fxdd mon, YYYY') as "Date" from dual;
 
 -- RR: Sama dengan tahun, namun bedanya RR juka digunakan untuk menampilkan abad sebelumnya jika tahun kurang dari 50
 -- YY: Selalu menampilkan dalam bentuk tahun 2000
 
-SELECT TO_CHAR(SYSDATE, 'DD-MON-YY')
+SELECT TO_CHAR(SYSDATE, 'DD-MON-YYYY')
 FROM dual;
 
-SELECT hire_date, TO_CHAR(hire_date, 'DD-Mon-RRRR')
+SELECT hire_date, TO_CHAR(hire_date, 'DD-Mon-RRRR'), TO_CHAR(hire_date, 'DD-Mon-YYYY')
 FROM employees;
 
-SELECT TO_DATE('27-OCT-95','DD-Mon-RR') AS "Date" FROM dual;
+SELECT TO_DATE('27-OCT-95','DD-Mon-YY') AS "Date" FROM dual;
 SELECT TO_DATE('27-OCT-17','DD-Mon-RR') AS "Date" FROM dual;
