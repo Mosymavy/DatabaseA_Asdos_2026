@@ -1,6 +1,6 @@
 CREATE TABLE copy_dept AS SELECT * FROM departments;
 CREATE TABLE copy_emp AS SELECT * FROM employees;
-CREATE TABLE copy_emp_2 AS SELECT * FROM employees WHERE 1=0;
+CREATE TABLE copy_emp_2 AS SELECT * FROM employees WHERE 1=0; -- WHERE 1=0 membuat tidak memasukkan data-data apa-apa, tetapi hanya memasukkan struktur tabel
 
 DESCRIBE copy_dept;
 DESCRIBE copy_emp;
