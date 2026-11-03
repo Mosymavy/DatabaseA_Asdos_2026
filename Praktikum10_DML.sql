@@ -31,13 +31,8 @@ VALUES (303,'Angelina','Wright', 'awright','4159982010', TO_DATE('July 10, 2017 
 SELECT * FROM copy_emp;
 
 SELECT first_name, last_name, TO_CHAR(hire_date, 'dd-Mon-YYYY HH24:MI') As "Date and Time"
-FROM copy_employees
+FROM copy_emp
 WHERE employee_id = 303;
-
-INSERT INTO sales_reps(id, name, salary, commission_pct)
- SELECT employee_id, last_name, salary, commission_pct
- FROM employees
- WHERE job_id LIKE '%REP%';
 
 INSERT INTO copy_emp_2 SELECT * FROM copy_emp WHERE last_name = 'Polanski';
 
@@ -45,22 +40,20 @@ SELECT * FROM copy_emp_2;
 
 UPDATE copy_dept SET department_name = 'Pemasaran' WHERE department_id = 20;
 UPDATE copy_dept SET department_name = 'Pengiriman', manager_id = 101 WHERE department_id = 50;
-
 UPDATE copy_emp SET phone_number = '123456' WHERE employee_id = 303;
-
 UPDATE copy_emp SET phone_number = '654321', last_name = 'Jones' WHERE employee_id >= 303;
 
 SELECT * FROM copy_dept;
 
-UPDATE copy_employees SET salary = (SELECT salary FROM copy_employees WHERE employee_id = 100)
+UPDATE copy_emp SET salary = (SELECT salary FROM copy_emp WHERE employee_id = 100)
 WHERE employee_id = 101;
 
 UPDATE copy_emp SET
-  salary = (SELECT salary FROM copy_employees WHERE employee_id = 205),
-  job_id = (SELECT job_id FROM copy_employees WHERE employee_id = 205)
+  salary = (SELECT salary FROM copy_emp WHERE employee_id = 205),
+  job_id = (SELECT job_id FROM copy_emp WHERE employee_id = 205)
 WHERE employee_id = 206;
 
-UPDATE copy_employees SET
+UPDATE copy_emp SET
 salary = (SELECT salary FROM employees WHERE employee_id = 205)
 WHERE employee_id = 202;
 
@@ -70,7 +63,7 @@ UPDATE copy_emp SET
   hire_date = (SELECT hire_date FROM employees WHERE last_name = 'Whalen')
 WHERE employee_id = 102;
 
-ALTER TABLE copy_employees
+ALTER TABLE copy_emp
 ADD (department_name varchar2(30) NOT NULL);
 
 UPDATE copy_emp e SET e.department_name =
@@ -82,7 +75,7 @@ DELETE FROM copy_emp
 WHERE department_id =
  (SELECT department_id FROM departments WHERE department_name = 'Shipping');
 
-DELETE FROM copy_employees e WHERE e.manager_id IN
+DELETE FROM copy_emp e WHERE e.manager_id IN
  (SELECT d.manager_id FROM employees d HAVING count (d.department_id) < 2 GROUP BY d.manager_id);
 
 DELETE FROM copy_emp WHERE department_id = 80;
@@ -130,24 +123,6 @@ INSERT ALL
  VALUES (hire_date, first_name, last_name)
 SELECT hire_date, first_name, last_name
 FROM employees;
-
-INSERT ALL
- WHEN call_format IN ('tlk','txt','pic') THEN
- INTO all_calls
-  VALUES (caller_id, call_timestamp, call_duration, call_format)
- WHEN call_format IN ('tlk','txt') THEN
- INTO police_record_calls
-  VALUES (caller_id, call_timestamp, recipient_caller)
- WHEN call_duration < 50 AND call_type = 'tlk' THEN
- INTO short_calls
-  VALUES (caller_id, call_timestamp, call_duration)
- WHEN call_duration > = 50 AND call_type = 'tlk' THEN
- INTO long_calls
-  VALUES (caller_id, call_timestamp, call_duration)
-SELECT caller_id, call_timestamp, call_duration, call_format,
- recipient_caller
-FROM calls
-WHERE TRUNC(call_timestamp ) = TRUNC(SYSDATE);
 
 CREATE TABLE copy_emp_2 AS SELECT * FROM employees WHERE 
 department_id > 100;
