@@ -141,25 +141,27 @@ ALTER TABLE my_friends
 DROP COLUMN favorite_game;
 
 --SET UNUSED
-ALTER TABLE copy_employees
+ALTER TABLE copy_emp
 SET UNUSED (email);
 
-ALTER TABLE copy_employees
+ALTER TABLE copy_emp
 DROP UNUSED COLUMNS;
 
 --DROP TABLE
-DROP TABLE copy_employees;
+DROP TABLE copy_emp;
 
 --FLASHBACK
-FLASHBACK TABLE copy_employees TO BEFORE DROP;
+FLASHBACK TABLE copy_emp TO BEFORE DROP;
 
 SELECT original_name, operation, droptime
 FROM user_recyclebin;
 
-DROP TABLE copy_employees PURGE;
+DROP TABLE copy_emp PURGE;
 
-RENAME my_cd_collection TO my_music;
+--RENAME
+RENAME copy_emp TO copy_employees;
 
+--TRUNCATE
 TRUNCATE TABLE copy_employees;
 
 COMMENT ON TABLE copy_employees
@@ -172,7 +174,7 @@ SELECT employee_id,first_name ||' '|| last_name AS "NAME",
     versions_operation AS "OPERATION",
     versions_starttime AS "START_DATE",
     versions_endtime AS "END_DATE", salary
-FROM copy_employees
+FROM copy_emp
     VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
 WHERE employee_id = 1;
 
@@ -180,37 +182,13 @@ INSERT INTO copy_employees
 VALUES (1, 'Natacha', 'Hansen', 'NHANSEN', '4412312341234',
     '07-SEP-1998', 'AD_VP', 12000, null, 100, 90, NULL);
 
-SELECT employee_id,first_name ||' '|| last_name AS "NAME",
-    versions_operation AS "OPERATION",
-    versions_starttime AS "START_DATE",
-    versions_endtime AS "END_DATE", salary
-FROM employees
-    VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
-WHERE employee_id = 1;
-
 UPDATE copy_employees
 SET salary = 1
-WHERE employee_id = 1;
-
-SELECT employee_id,first_name ||' '|| last_name AS "NAME",
-    versions_operation AS "OPERATION",
-    versions_starttime AS "START_DATE",
-    versions_endtime AS "END_DATE", salary
-FROM employees
-    VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
 WHERE employee_id = 1;
 
 DELETE from copy_employees
 WHERE employee_id = 1;
 
-SELECT employee_id,first_name ||' '|| last_name AS "NAME",
-    versions_operation AS "OPERATION",
-    versions_starttime AS "START_DATE",
-    versions_endtime AS "END_DATE", salary
-FROM employees
-    VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
-WHERE employee_id = 1;
-
 SELECT employee_id, salary
-FROM copy_employees
+FROM copy_emp
 WHERE employee_id = 1;
