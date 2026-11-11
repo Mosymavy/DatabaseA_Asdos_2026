@@ -203,7 +203,7 @@ TRUNCATE TABLE emp;
 COMMENT ON TABLE employees IS 'Ini table employee';
 
 --clean up 
-DROP TABLE copy_debt;
+DROP TABLE copy_dept;
 DROP TABLE copy_emp;
 DROP TABLE copy_emp_2;
 DROP TABLE df;
